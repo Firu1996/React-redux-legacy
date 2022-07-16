@@ -35,12 +35,13 @@ export function cartReducer(state = initialState, action) {
                 cart: updatedCart
             }
             break;
+
         case DELETE_CART:
             return {
                 ...state,
                 cart: state.cart.filter(item => item.id !== action.payload)
             }
-
+            break;
 
         default:
             return state
