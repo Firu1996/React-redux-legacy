@@ -14,7 +14,7 @@ const initialState = {
 
 
 
-export function addToCart(state = initialState, action) {
+export function cartReducer(state = initialState, action) {
     switch (action.type) {
         case ADD_TO_CART:
             const updatedState = [...state.cart, action.payload]
