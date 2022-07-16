@@ -8,9 +8,7 @@
 */
 import { ADD_TO_CART, DELETE_CART } from '../actions/cartActions'
 
-const initialState = {
-    cart: []
-}
+const initialState = [];
 
 
 
@@ -19,28 +17,22 @@ export function cartReducer(state = initialState, action) {
         case ADD_TO_CART:
             let updatedCart;
 
-            const foundItem = state.cart.find(item => item.id === action.payload.id)
+            const foundItem = state.find(item => item.id === action.payload.id)
 
             if (!foundItem) {
-                updatedCart = [...state.cart, action.payload]
+                updatedCart = [...state, action.payload]
             } else {
-                updatedCart = state.cart.map(item => ({
+                updatedCart = state.map(item => ({
                     ...item,
                     qty: item.id === foundItem.id ? item.qty + 1 : item.qty
                 }))
             }
 
-            return {
-                ...state,
-                cart: updatedCart
-            }
+            return updatedCart
             break;
 
         case DELETE_CART:
-            return {
-                ...state,
-                cart: state.cart.filter(item => item.id !== action.payload)
-            }
+            return state.filter(item => item.id !== action.payload)
             break;
 
         default:
