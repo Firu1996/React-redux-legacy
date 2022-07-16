@@ -6,8 +6,10 @@ import Signin from './pages/SIgnin'
 import Cart from './pages/Cart'
 
 import './App.css'
+import { useSelector } from 'react-redux'
 
-function App() {
+
+function UnAuthApp() {
   return (
     <div className='App'>
       <Nav />
@@ -15,6 +17,19 @@ function App() {
         <Route path='/signin'>
           <Signin />
         </Route>
+        <Route path='/'>
+          <Products />
+        </Route>
+      </Switch>
+    </div>
+  )
+}
+
+function AuthApp() {
+  return (
+    <div className='App'>
+      <Nav />
+      <Switch>
         <Route path='/cart'>
           <Cart />
         </Route>
@@ -22,6 +37,17 @@ function App() {
           <Products />
         </Route>
       </Switch>
+    </div>
+  )
+}
+
+
+function App() {
+  const { user } = useSelector((state) => state.auth)
+
+  return (
+    <div className='App'>
+      {!user ? <UnAuthApp /> : <AuthApp />}
     </div>
   )
 }

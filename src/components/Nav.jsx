@@ -4,6 +4,8 @@ import { useSelector } from 'react-redux'
 
 export default function Nav() {
   const cart = useSelector((state) => state.cart)
+  const { user } = useSelector((state) => state.auth)
+
   return (
     <header className='head'>
       <div>
@@ -11,14 +13,14 @@ export default function Nav() {
           <li className='nav-list'>
             <Link to='/'>Products</Link>
           </li>
-          <li className='nav-list'>
+          {user && <li className='nav-list'>
             <Link to='/cart'>Cart
               <span className='cart-num'>
                 {cart.reduce((sum, item) => sum + item.qty, 0)}
               </span></Link>
-          </li>
+          </li>}
           <li className='nav-list'>
-            <Link to='/signin'>Sign in</Link>
+            {user ? <button>Sign out</button> : <Link to='/signin'>Sign in</Link>}
           </li>
         </ul>
       </div>
