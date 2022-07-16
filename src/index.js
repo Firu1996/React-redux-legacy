@@ -7,9 +7,9 @@ import reportWebVitals from './reportWebVitals'
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { cartReducer } from './reducers/cartReducer'
+import { devToolsEnhancer } from 'redux-devtools-extension'
 
-
-const store = createStore(cartReducer);
+const store = createStore(cartReducer, devToolsEnhancer());
 
 ReactDOM.render(
   <React.StrictMode>
