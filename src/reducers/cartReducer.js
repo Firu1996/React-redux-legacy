@@ -6,7 +6,7 @@
     qty: number
 }
 */
-import { ADD_TO_CART } from '../actions/cartActions'
+import { ADD_TO_CART, DELETE_CART } from '../actions/cartActions'
 
 const initialState = {
     cart: []
@@ -35,6 +35,13 @@ export function cartReducer(state = initialState, action) {
                 cart: updatedCart
             }
             break;
+        case DELETE_CART:
+            return {
+                ...state,
+                cart: state.cart.filter(item => item.id !== action.payload)
+            }
+
+
         default:
             return state
     }
