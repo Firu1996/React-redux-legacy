@@ -1,9 +1,10 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { deleteCart } from '../actions/cartActions'
 
 export default function Cart() {
   const cart = useSelector(state => state.cart);
-
+  const dispatch = useDispatch()
   return <div className='cart'>
     <div className='cart-body'>
       <h4>Title</h4>
@@ -18,7 +19,9 @@ export default function Cart() {
         <p>{item.price}</p>
         <p>{item.qty}</p>
         <p>{item.price * item.qty}</p>
-        <p style={{ cursor: 'pointer' }}>X</p>
+        <p style={{ cursor: 'pointer' }}
+          onClick={() => dispatch(deleteCart(item.id))}>
+          X</p>
       </div>)}
   </div>
 }
